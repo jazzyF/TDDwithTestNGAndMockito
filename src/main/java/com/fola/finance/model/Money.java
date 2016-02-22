@@ -1,10 +1,18 @@
 package com.fola.finance.model;
 
+import org.apache.commons.lang3.StringUtils;
+
 public class Money {
 	private final int amount;
 	private final String currency;
 
 	public Money(int amount, String currency) {
+		if (amount < 0) {
+			throw new IllegalArgumentException("illegal negative amount: [" + amount + "]");
+		}
+		if (StringUtils.isEmpty(currency)) {
+			throw new IllegalArgumentException("illegal currency: [" + currency + "], it can not be null or empty");
+		}
 		this.amount = amount;
 		this.currency = currency;
 	}
